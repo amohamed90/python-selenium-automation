@@ -12,41 +12,63 @@ service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
 
-# Open url
-driver.get('https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fs%2F%3F_encoding%3DUTF8%26hvadid%3D694878214743%26hvdev%3Dc%26hvdvcmdl%3D%26hvexpln%3D67%26hvlocint%3D%26hvlocphy%3D9031992%26hvnetw%3Dg%26hvocijid%3D10712048830082493938--%26hvpone%3D%26hvpos%3D%26hvptwo%3D%26hvqmt%3Db%26hvrand%3D10712048830082493938%26hvtargid%3Dkwd-419491829174%26hydadcr%3D26642_11751832%26ie%3DUTF8%26index%3Daps%26keywords%3Dnew%2520account%2520sign%2520up%2520for%2520amazon%26mcid%3D453ce6308aa03548916f769835b7da28%26ref%3Dpd_sl_8lgzans1wq_b_p67%26tag%3Dgooghydr-20%26ref_%3Dnav_newcust&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0')
+url = 'https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&prevRID=YJB074CTT738XF8TAZWX&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&prepopulatedLoginId=&failedSignInCount=0&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=usflex&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0'
 
-# Amazon logo
+# open the url
+driver.get(url)
+
+# Even though I can find locators with ID, i will use CSS for this homework since it is all about CSS locators unless it can't be selected by CSS
+
+# Locate Amazon logo
 driver.find_element(By.CSS_SELECTOR, '.a-icon-logo')
 
-# Create Account Text
+# Locate Create account text
 driver.find_element(By.CSS_SELECTOR, 'h1.a-spacing-small')
+# OR use XPATH to get partial text
+driver.find_element(By.XPATH, '//h1[contains(.,"Create account")]')
 
-# Your Name input field
+# Locate your name input field
+# Optimal solution By.ID
 driver.find_element(By.ID, 'ap_customer_name')
+# OR using CSS locators
+driver.find_element(By.CSS_SELECTOR, '#ap_customer_name')
+driver.find_element(By.CSS_SELECTOR,'[placeholder="First and last name"]' )
 
-# Mobile Number or input field
+# Locate Mobile number or email
+# Optimal locator is By.ID
 driver.find_element(By.ID, 'ap_email')
+# OR using CSS locators
+driver.find_element(By.CSS_SELECTOR, '#ap_email')
+driver.find_element(By.CSS_SELECTOR, '[data-validation-id="email"]')
 
-# Password input field
+# Locate Password
+# Optimal locator is By.ID
 driver.find_element(By.ID, 'ap_password')
+# OR using css locators
+driver.find_element(By.CSS_SELECTOR, '.auth-require-password-validation')
 
-# Password Requirement
-driver.find_element(By.ID, 'auth-password-requirement-info')
+# Locate password content message
+driver.find_element(By.CSS_SELECTOR, '#ap_password_context_message_section')
 
-# Re-enter Password Input field
+# Locate password check
+# Optimal locator By.ID
 driver.find_element(By.ID, 'ap_password_check')
+# OR By css locators
+driver.find_element(By.CSS_SELECTOR, '#ap_password_check')
+driver.find_element(By.CSS_SELECTOR, '[name="passwordCheck"]')
 
-# Button for creating the account
+# Locate Continue button link
+# Optimal locator by ID
 driver.find_element(By.ID, 'continue')
+# OR by css locators
+driver.find_element(By.CSS_SELECTOR, '#continue')
+driver.find_element(By.CSS_SELECTOR, '[aria-labelledby="auth-continue-announce"]')
 
-# Conditions of use
-driver.find_element(By.XPATH, "//div[@id='legalTextRow']//a[contains(@href, 'nodeId=508088')]")
+# Locate Condition of Use lin
+driver.find_element(By.CSS_SELECTOR, '[href*="ref=ap_register_notification_condition_of_use?')
 
-# Privacy Notice
-driver.find_element(By.XPATH, "//div[@id='legalTextRow']//a[contains(@href, 'nodeId=468496')]")
+# Locate Privacy Notice
+driver.find_element(By.CSS_SELECTOR, '[href*="ref=ap_register_notification_privacy_notice"]')
 
-# Sign in link
-driver.find_element(By.CSS_SELECTOR, ".a-link-emphasis")
-
-print('Tests passed')
-
+# Locate Sign in link at the bottom
+driver.find_element(By.CSS_SELECTOR, '.a-link-emphasis')

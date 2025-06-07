@@ -1,7 +1,8 @@
-Feature: Target cart test cases
+# Created by alaamohamed at 6/7/25
+Feature: Tests for Target cart
 
 
-  Scenario: Verify that a cart is empty
-    Given Open Target main page
-    When Click on Cart icon
-    Then Verify “Your cart is empty” message is shown
+  Scenario: Cart is empty
+    Given Open target main page
+    When Click on cart icon
+    Then Verify cart is empty

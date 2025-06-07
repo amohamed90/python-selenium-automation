@@ -1,8 +1,9 @@
-Feature: Target sign-in test cases
+# Created by alaamohamed at 6/7/25
+Feature: Tests for Target cart
 
 
-  Scenario: Logged out user can navigate to the Sign-in page
-    Given Open Target main page
-    When Main click sign in
-    And Navigation click Sign In
-    Then Verify Sign In form opened
+  Scenario: A logged out user can sign-in
+    Given Open target main page
+    When Click on sign account
+    When Click on Sign in
+    Then Verify Sign in form opened
