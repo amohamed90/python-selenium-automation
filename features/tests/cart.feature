@@ -8,8 +8,12 @@ Feature: Tests for Target cart
     Then Verify cart is empty
 
 
-  Scenario: Cart has 1 item
+  Scenario: User can add a product to cart
     Given Open target main page
-    When Search for tea
+    When Search for mug
     And Add to cart
+    And Store product name
+    And Add to cart button from side-nav
+    And Open cart page
     Then Verify cart has items
+    And Verify cart has correct product

@@ -1,5 +1,5 @@
 # Created by alaamohamed at 6/7/25
-Feature: Tests for Target cart
+Feature: Tests for Target sign-in
 
 
   Scenario: A logged out user can sign-in

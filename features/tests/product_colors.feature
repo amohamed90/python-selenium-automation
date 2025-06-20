@@ -1,6 +1,5 @@
-# Created by alaamohamed at 6/19/25
-Feature: # Enter feature name here
-  # Enter feature description here
+Feature: User can search for a product color
 
-  Scenario: # Enter scenario name here
-    # Enter steps here
+Scenario: Verify product colors
+    Given Open target A-91269718 detailed page
+    Then User can click through colors
