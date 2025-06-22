@@ -10,11 +10,13 @@ PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='cartItem-title']")
 @when('Click on cart icon')
 def click_cart_icon(context):
     # find element and click
-    context.driver.find_element(*CART_ICON).click()
+    context.app.cart_page.click_cart_icon()
+    # context.driver.find_element(*CART_ICON).click()
 
 @then('Verify cart is empty')
 def verify_cart_empty(context):
-    context.driver.find_element(*EMPTY_CART)
+    context.app.cart_page.verify_cart_empty()
+    # context.driver.find_element(*EMPTY_CART)
 
 @then('Verify cart has correct product')
 def verify_product_name(context):

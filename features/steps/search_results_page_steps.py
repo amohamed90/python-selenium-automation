@@ -37,8 +37,11 @@ def open_cart(context):
 
 @then("Verify {product} results show")
 def verify_search(context, product):
-    actual_result = context.driver.find_element(*SEARCH_RESULTS).text.lower()
-    assert product in actual_result, f'Expected {product} to be in {actual_result}'
+    context.app.search_results_page.verify_search_results()
+
+    # actual_result = context.driver.find_element(*SEARCH_RESULTS).text.lower()
+    # assert product in actual_result, f'Expected {product} to be in {actual_result}'
+
 
 @then("Verify {product} name")
 def verify_product_name(context, product):
