@@ -1,6 +1,6 @@
 Feature: User can search for a product
 
-  Scenario: Search for a tea
+  Scenario: Search for a candy
     Given Open target main page
     When Search for candy
     Then Verify candy results show

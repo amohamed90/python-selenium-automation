@@ -6,6 +6,7 @@ Feature: Tests for Target cart
     Given Open target main page
     When Click on cart icon
     Then Verify cart is empty
+    And Verify cart page opened
 
 
   Scenario: User can add a product to cart

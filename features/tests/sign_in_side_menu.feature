@@ -1,9 +1,17 @@
-# Created by alaamohamed at 6/7/25
-Feature: Tests for Target sign-in
 
+Feature: Tests for Target sign-in
 
   Scenario: A logged out user can sign-in
     Given Open target main page
     When Click on sign account
-    When Click on Sign in
-    Then Verify Sign in form opened
+    And Click on Sign in
+    And Verify Sign in form opened
+    And Enter username
+    And Click continue
+    And Enter password
+    And Click continue
+    And Click on sign account
+    Then Verify user is signed in
+
+
+

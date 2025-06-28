@@ -3,11 +3,6 @@ from selenium.webdriver.common.by import By
 from behave import given, when, then
 from selenium.webdriver.support import expected_conditions as EC
 
-ADD_TO_CART = (By.CSS_SELECTOR, "[data-test='chooseOptionsButton']")
-ORDER_PICK_UP_BTN = (By.CSS_SELECTOR, "[data-test='shippingButton']")
-CART_ICON = (By.CSS_SELECTOR, "[href='/cart']")
-SEARCH_RESULTS = (By.XPATH, "//div[@data-test='lp-resultsCount']")
-SIDE_BAR_PRODUCT_NAME = (By.CSS_SELECTOR, '[data-test="content-wrapper"] h4')
 PRODUCT_NAMES_RESULTS = (By.CSS_SELECTOR, '[data-test="product-title"]')
 PRODUCT_NAME_DEALS = (By.CSS_SELECTOR, '[data-test="productCardVariantRecommendationTitle"]')
 PRODUCT_NAME_POPULAR_FILTER = (By.CSS_SELECTOR, '[data-test="navItemTitleComponent"]')
@@ -17,30 +12,26 @@ PRODUCT_POPULAR_IMAGES = (By.CSS_SELECTOR, '[class*="itemPictureWrapper"]')
 
 @when('Add to cart')
 def add_to_cart(context):
-    context.driver.find_element(*ADD_TO_CART).click()
-    context.driver.wait.until(EC.visibility_of_element_located(SIDE_BAR_PRODUCT_NAME), message='name of product not showing')
+    context.app.search_results_page.add_to_cart_btn()
+    context.app.search_results_page.wait_for_element()
 
 @when('Store product name')
 def store_product_name(context):
-    context.product_name = context.driver.find_element(*SIDE_BAR_PRODUCT_NAME).text
+    context.product_name = context.app.search_results_page.store_product_info()
     print('Product Name is, ', context.product_name)
 
 @when('Add to cart button from side-nav')
 def add_to_cart_from_side_nav(context):
-    context.driver.wait.until(EC.element_to_be_clickable(ORDER_PICK_UP_BTN), message='add to cart is not clickable').click()
-
+    context.app.search_results_page.add_to_cart_side_nav()
 
 @when('Open cart page')
 def open_cart(context):
-    context.driver.find_element(*CART_ICON).click()
+    context.app.search_results_page.open_cart()
 
 
 @then("Verify {product} results show")
 def verify_search(context, product):
-    context.app.search_results_page.verify_search_results()
-
-    # actual_result = context.driver.find_element(*SEARCH_RESULTS).text.lower()
-    # assert product in actual_result, f'Expected {product} to be in {actual_result}'
+    context.app.search_results_page.verify_search_results(product)
 
 
 @then("Verify {product} name")
