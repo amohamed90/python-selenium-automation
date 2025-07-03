@@ -35,6 +35,27 @@ class Page:
     def wait_for_element_disappear(self, *locator):
         self.wait.until(EC.invisibility_of_element_located(locator), message='Element is still visible')
 
+    def wait_for_url_contains(self, partial_url):
+        self.wait.until(EC.url_contains(partial_url), message=f'{partial_url} does not exist')
+
+    def get_current_window_id(self):
+        window = self.driver.current_window_handle
+        print(f'Original window id:, {window}')
+        return window
+
+    def switch_to_window(self):
+        self.wait.until(EC.new_window_is_opened)
+        all_windows = self.driver.window_handles
+        print(f'Switched to window id: {all_windows[1]}')
+        self.driver.switch_to.window(all_windows[1])
+
+    def switch_to_window_by_id(self, window_id):
+        print(f'Switched to window id: {window_id}')
+        self.driver.switch_to.window(window_id)
+
+    def close_window(self):
+        self.driver.close()
+
     def verify_text(self, expected_text, *locator):
         actual_text = self.find_element(*locator).text
         assert actual_text[:20] == expected_text[:20], f'{actual_text} does not match {expected_text}'
@@ -50,6 +71,3 @@ class Page:
     def verify_partial_url(self, expected_partial_url):
         actual_url = self.driver.current_url
         assert expected_partial_url in actual_url, f'{expected_partial_url} is not in {actual_url}'
-
-    def wait_for_url_contains(self, partial_url):
-        self.wait.until(EC.url_contains(partial_url), message=f'{partial_url} does not exist')

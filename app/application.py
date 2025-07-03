@@ -4,6 +4,8 @@ from pages.search_results_page import SearchResultsPage
 from pages.cart_page import Cart
 from pages.side_menu_page import SideMenuPage
 from pages.sign_in_page import SignInPage
+from pages.target_app_page import TargetAppPage
+from pages.privacy_policy_page import PrivacyPolicyPage
 
 class Application:
 
@@ -14,4 +16,6 @@ class Application:
         self.cart_page = Cart(driver)
         self.side_menu_page = SideMenuPage(driver)
         self.sign_in_page = SignInPage(driver)
+        self.target_app_page = TargetAppPage(driver)
+        self.privacy_policy_page = PrivacyPolicyPage(driver)
 
